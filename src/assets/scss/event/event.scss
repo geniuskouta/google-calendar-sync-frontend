@@ -1,0 +1,54 @@
+.event-list {
+    margin-top: 20px;
+}
+
+.event-item-card {
+    border-radius: 5px;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    &:nth-child(n + 2) {
+        margin-top: 15px;
+    }
+}
+
+@mixin event-normal-text {
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.event-item-time {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.event-item-summary {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.event-item-icon {
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.event-item-location, .event-item-description {
+    font-size: 0;
+    margin-top: 8px;
+}
+
+.event-item-location-text {
+    @include event-normal-text;
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 2px;
+}
+
+.event-item-description-text {
+    @include event-normal-text;
+    word-break: break-all;
+}
