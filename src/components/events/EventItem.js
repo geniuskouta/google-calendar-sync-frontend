@@ -69,10 +69,10 @@ const EventItem = (props) => {
         <span className="event-item-icon">📍</span>
         <span className="event-item-location-text">{event.location}</span>
       </div>
-      <div class="event-item-description">
+      <div className="event-item-description">
         <div className="event-item-description-text">{event.description}</div>
       </div>
-      <button onClick={saveEventOnCalendar}>save</button>
+      <button className="event-item-save-button" onClick={saveEventOnCalendar}>SAVE</button>
     </li>
   ) : null;
 };

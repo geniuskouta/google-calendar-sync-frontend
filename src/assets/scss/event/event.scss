@@ -1,3 +1,5 @@
+@import '../variables.scss';
+
 .event-list {
     margin-top: 20px;
 }
@@ -51,4 +53,11 @@
 .event-item-description-text {
     @include event-normal-text;
     word-break: break-all;
+}
+
+.event-item-save-button {
+    @include button-sm;
+    color: #ffffff;
+    background-color: $tomato;
+    margin-top: 8px;
 }
