@@ -1,3 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap');
 @import './reset.scss';
 @import './event/event.scss';
+@import './plan/plan.scss';
+
+.plan-item-img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}

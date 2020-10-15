@@ -1,27 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
 import EventItem from './EventItem';
 
-const endpoint = "http://localhost:8000";
-
-const EventList = () => {
-    const [events, setEvents] = useState();
-    const [credentials, setCredentials] = useState(null);
+const EventList = (props) => {
+    console.log(props);
+    const { events, fetchEvents } = props;
+    const { credentials, setCredentials } = useState(null);
     useEffect(() => {
         if(!events) {
             fetchEvents();
         }
         console.log(events);
-      }, [events]);
-
-    const fetchEvents = async () => {
-        axios.get(`${endpoint}`).then(response => {
-            setEvents(response.data);
-        }).catch(err => {
-            console.log(err);
-        });
-    }
+    }, [events]);
 
     return (
         <ul className="event-list">

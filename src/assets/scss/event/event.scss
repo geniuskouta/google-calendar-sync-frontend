@@ -5,6 +5,7 @@
 }
 
 .event-item-card {
+    background-color: #ffffff;
     border-radius: 5px;
     max-width: 420px;
     margin: 0 auto;
@@ -59,5 +60,7 @@
     @include button-sm;
     color: #ffffff;
     background-color: $tomato;
+    display: inline-block;
     margin-top: 8px;
+    text-decoration: none;
 }

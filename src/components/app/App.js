@@ -1,11 +1,11 @@
 import React from 'react';
-import EventList from '../events/EventList';
+import Router from '../router/Router';
 
-function App() {
+function App(props) {
   return (
-    <div className="App">
-      <EventList />
-    </div>
+    <>
+      <Router {...props} />
+    </>
   );
 }
 
