@@ -1,39 +1,128 @@
 $max-screen-width: 1280px;
 $min-screen-width: 880px;
 
-
-.plan-details-header {
-    background-color: #2f3542;
-    position: relative;
-    z-index: 0;
-    max-width: $max-screen-width;
-    min-width: $min-screen-width;
+.plan-item-img {
+    display: block;
+    width: 100%;
     height: 200px;
-    margin: 0 auto;
+    object-fit: cover;
 }
 
-.plan-details-summary {
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
-    line-height: 200px;
-}
-
-.plan-details-container {
-    font-size: 0;
-    display: flex;
-    justify-content: space-between;
-    max-width: 1080px;
-    min-width: $min-screen-width;
-    margin: 0 auto;
-    padding: 0 18px;
+.plan-details {
+    &-header {
+        background-color: #2f3542;
+        position: relative;
+        z-index: 0;
+        max-width: $max-screen-width;
+        min-width: $min-screen-width;
+        height: 282px;
+        margin: 0 auto;
+    }
+    &-container {
+        font-size: 0;
+        display: flex;
+        justify-content: space-between;
+        width: 984px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
 }
 
 .plan-details-event-list {
+    background-color: #70A1FF;
     position: relative;
-    top: -42px;
+    top: -177px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     width: 420px;
     margin-top: 0;
+    padding: 24px 35px 48px;
+    box-sizing: border-box;
+    height: calc(100vh - 105px);
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    &-title {
+        color: #ffffff;
+        font-size: 32px;
+        font-weight: bold;
+    }
+}
+
+.plan-details-description {
+    width: 509px;
+    position: relative;
+    top: -153px;
+    &-summary {
+        color: #ffffff;
+        font-size: 32px;
+        font-weight: bold;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+        text-transform: uppercase;
+    }
+}
+
+.plan-details-description-card {
+    background-color: #ffffff;
+    display: block;
+    max-height: 278px;
+    margin-top: 24px;
+    padding: 18px 36px;
+    border-radius: 5px;
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.35);
+    &-title {
+        color: #333333;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    &-text {
+        color: #333333;
+        font-size: 14px;
+        line-height: 19px;
+        margin-top: 16px;
+    }
+    &-author {
+        margin-top: 18px;
+        &-icon {
+            vertical-align: middle;
+            display: inline-block;
+            width: 34px;
+            height: 34px;
+        }
+        &-info {
+            vertical-align: middle;
+            display: inline-block;
+            margin-left: 19px;
+        }
+        &-name {
+            font-size: 14px;
+            line-height: 19px;
+            word-wrap: none;
+            text-overflow: ellipsis;
+        }
+        &-share-count {
+            font-size: 14px;
+            line-height: 19px;
+            &-marked {
+                font-weight: bold;
+            }
+        }
+    }
+    &-buttons {
+        margin-top: 18px;
+    }
+    &-button {
+        @include button-md;
+        display: inline-block;
+    }
+    &-button-save {
+        color: #ffffff;
+        background-color: $watermelon;
+    }
+    &-button-share {
+        color: #ffffff;
+        background-color: $ocean;
+        margin-left: 19px;
+    }
 }

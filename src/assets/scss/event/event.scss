@@ -56,11 +56,10 @@
     word-break: break-all;
 }
 
-.event-item-save-button {
+.event-item-button-save {
     @include button-sm;
     color: #ffffff;
-    background-color: $tomato;
-    display: inline-block;
+    background-color: $watermelon;
+    display: block;
     margin-top: 8px;
-    text-decoration: none;
 }

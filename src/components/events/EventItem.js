@@ -72,7 +72,7 @@ const EventItem = (props) => {
       <div className="event-item-description">
         <div className="event-item-description-text">{event.description}</div>
       </div>
-      <button className="event-item-save-button" onClick={saveEventOnCalendar}>SAVE</button>
+      <a className="event-item-button-save" onClick={saveEventOnCalendar}>SAVE</a>
     </li>
   ) : null;
 };

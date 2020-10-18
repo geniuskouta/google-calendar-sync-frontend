@@ -12,13 +12,13 @@ const PlanItem = (props) => {
       </div>
       <div className="event-item-summary">{plan.summary}</div>
       <div className="event-item-location">
-        <span className="event-item-icon">📍</span>
+        <span className="event-item-icon">😏</span>
         <span className="event-item-location-text">{plan.author}</span>
       </div>
       <div className="event-item-description">
         <div className="event-item-description-text">{plan.description}</div>
       </div>
-      <a href={"/plan/" + plan._id} className="event-item-save-button">
+      <a href={"/plan/" + plan._id} className="event-item-button-save">
         SEE MORE
       </a>
     </li>

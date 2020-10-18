@@ -3,9 +3,7 @@
 @import './event/event.scss';
 @import './plan/plan.scss';
 
-.plan-item-img {
-    display: block;
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+#root {
+    height: 100vh;
+    overflow: hidden;
 }
