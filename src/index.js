@@ -9,23 +9,27 @@ import { applyMiddleware, createStore, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 
+import { authReducer } from './reducers/authReducer';
 import { eventReducer } from './reducers/eventReducer';
 import { planReducer } from './reducers/planReducer';
 
+import { setRefreshToken, setAuthCode, setRedirectUri } from './actions/authActions';
 import { fetchEvents } from './actions/eventActions';
 import { fetchPlans, fetchPlanById, selectPlan } from './actions/planActions';
 
 const rootReducer = combineReducers({
+  authReducer: authReducer,
   eventReducer: eventReducer,
   planReducer: planReducer
 });
-
-console.log(eventReducer);
 
 const Store = createStore(rootReducer, applyMiddleware(logger, thunk));
 
 const mapDispatchToProps = (dispatch) => { 
   return {
+    setAuthCode: () => dispatch(setAuthCode()),
+    setRefreshToken: (refreshToken) => dispatch(setRefreshToken(refreshToken)),
+    setRedirectUri: () => dispatch(setRedirectUri()),
     fetchEvents: () => dispatch(fetchEvents()),
     fetchPlans: () => dispatch(fetchPlans()),
     fetchPlanById: (_id) => dispatch(fetchPlanById(_id)),
@@ -35,6 +39,10 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => { 
   return {
+    authCode: state.authReducer.authCode,
+    refreshToken: state.authReducer.refreshToken,
+    redirectUri: state.authReducer.redirectUri,
+
     events: state.eventReducer.events,
     selectedEvent: state.eventReducer.selectedEvent,
 

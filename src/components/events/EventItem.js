@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-
-const REFRESH_TOKEN = 'REFRESH_TOKEN';
-const CODE = 'CODE';
+import { REFRESH_TOKEN, AUTH_CODE } from '../../types/authTypes';
 
 const endpoint = "http://localhost:8000";
 
 const EventItem = (props) => {
-  const { credentials, setCredentials } = props;
   const [time, setTime] = useState(null);
-  const { event } = props;
+  const [isSaved, setSaveStatus] = useState(null);
+  const { event, authCode, refreshToken, setAuthCode, setRefreshToken, redirectUri, setRedirectUri } = props;
 
   useEffect(() => {
-    if(!credentials) {
-      let code = decodeURIComponent(window.location.search);
-      if(code.length > 0) {
-        code = code.split('code=')[1].split('&')[0];
-        setCredentials({type: CODE, token: code});
-      }
+    if(!redirectUri) {
+      setRedirectUri();
     }
 
     if (!time) {
@@ -28,7 +22,7 @@ const EventItem = (props) => {
         endTime,
       });
     }
-  }, [credentials, event.startTime, event.endTime, time]);
+  }, [redirectUri, refreshToken, event.startTime, event.endTime, time]);
 
   const getHoursFromISO = (ISO) => {
     const time = ISO.split("T")[1].slice(0, 5); // get only hours and minutes
@@ -36,28 +30,39 @@ const EventItem = (props) => {
   };
 
   const saveEventOnCalendar = async () => {
-    !credentials ? axios.post(`${endpoint}/save`, {})
-    .then((response) => {
-        if(typeof(response.data) === 'string') {
-          return window.location.href = response.data; //auth url
+    if(!authCode && !refreshToken) {
+      return await axios.post(`${endpoint}/event/save`, {redirectUri : redirectUri})
+      .then((response) => {
+          if(typeof(response.data) === 'string') {
+            return window.location.href = response.data; //auth url
+          }
+      }).catch(err => {
+          console.log(err);
+      });
+    }
+    
+    axios.post(`${endpoint}/event/save`, {
+        eventId: event._id,
+        type: refreshToken ? REFRESH_TOKEN : AUTH_CODE,
+        token: refreshToken || authCode,
+        redirectUri: redirectUri
+      }).then(response => {
+        if(response.data.refreshToken) {
+          setSaveStatus(true);
+          setRefreshToken(response.data.refreshToken);
+          return ;
         }
-    }).catch(err => {
-        console.log(err);
-    }) :
-    axios.post(`${endpoint}/save`, {
-      eventId: event._id,
-      type: credentials.type,
-      token: credentials.token
-    }).then(response => {
-      const { refreshToken } = response.data;
-      if(refreshToken) {
-        setCredentials({ type: REFRESH_TOKEN, token: refreshToken });
-      }
-      return ;
-    }).catch(err => {
-      console.log(err);
-    });
-  }
+      }).catch(err => {
+        setAuthCode(null);
+        setRefreshToken(null);
+      });
+    }
+
+    const EventSaveButton = (props) => {
+      const { isSaved } = props;
+      return isSaved ? <span className="event-item-button-saved">SAVED!</span> 
+      : <a className="event-item-button-save" onClick={saveEventOnCalendar}>SAVE</a>;
+    }
 
   return time ? (
     <li className="event-item-card">
@@ -72,7 +77,7 @@ const EventItem = (props) => {
       <div className="event-item-description">
         <div className="event-item-description-text">{event.description}</div>
       </div>
-      <a className="event-item-button-save" onClick={saveEventOnCalendar}>SAVE</a>
+      <EventSaveButton isSaved={isSaved} />
     </li>
   ) : null;
 };

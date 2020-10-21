@@ -32,6 +32,10 @@ export const fetchPlanById = (planId) => {
     }
 }
 
+export const savePlanById = (planId) => {
+
+}
+
 export const selectPlan = (planId) => {
     return (dispatch, getState) => {
         const { plans } = getState().planReducer;

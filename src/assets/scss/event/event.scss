@@ -63,3 +63,15 @@
     display: block;
     margin-top: 8px;
 }
+
+.event-item-button-saved {
+    @include button-sm;
+    color: #ffffff;
+    background-color: $ocean;
+    display: block;
+    margin-top: 8px;
+    cursor: auto;
+    &:hover {
+        opacity: 1;
+    }
+}
