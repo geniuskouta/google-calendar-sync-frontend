@@ -14,7 +14,7 @@ const PlanList = (props) => {
   }, [plans]);
 
   return (
-    <ul className="event-list">
+    <ul className="plan-list event-list">
       {plans &&
         plans.map((plan) => {
           return <PlanItem plan={plan} selectPlan={selectPlan} />;

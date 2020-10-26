@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
-import { REFRESH_TOKEN, AUTH_CODE } from '../../types/authTypes';
+import axios from "axios";
+import { REFRESH_TOKEN, AUTH_CODE } from "../../types/authTypes";
 
 const endpoint = "http://localhost:8000";
 
 const EventItem = (props) => {
   const [time, setTime] = useState(null);
   const [isSaved, setSaveStatus] = useState(null);
-  const { event, authCode, refreshToken, setAuthCode, setRefreshToken, redirectUri, setRedirectUri } = props;
+  const {
+    event,
+    authCode,
+    refreshToken,
+    setAuthCode,
+    setRefreshToken,
+    redirectUri,
+    setRedirectUri,
+  } = props;
 
   useEffect(() => {
-    if(!redirectUri) {
+    if (!redirectUri) {
       setRedirectUri();
     }
 
@@ -30,39 +38,62 @@ const EventItem = (props) => {
   };
 
   const saveEventOnCalendar = async () => {
-    if(!authCode && !refreshToken) {
-      return await axios.post(`${endpoint}/event/save`, {redirectUri : redirectUri})
-      .then((response) => {
-          if(typeof(response.data) === 'string') {
-            return window.location.href = response.data; //auth url
+    if (!authCode && !refreshToken) {
+      return await axios
+        .post(`${endpoint}/event/save`, {
+          credentials: {
+            type: null,
+            token: null,
+            redirectUri: redirectUri,
+          },
+        })
+        .then((response) => {
+          if (typeof response.data === "string") {
+            return (window.location.href = response.data); //auth url
           }
-      }).catch(err => {
+        })
+        .catch((err) => {
           console.log(err);
-      });
+        });
     }
-    
-    axios.post(`${endpoint}/event/save`, {
+
+    axios
+      .post(`${endpoint}/event/save`, {
         eventId: event._id,
-        type: refreshToken ? REFRESH_TOKEN : AUTH_CODE,
-        token: refreshToken || authCode,
-        redirectUri: redirectUri
-      }).then(response => {
-        if(response.data.refreshToken) {
+        startTime: event.startTime,
+        endTime: event.endTime,
+        summary: event.summary,
+        location: event.location,
+        description: event.description,
+        credentials: {
+          type: refreshToken ? REFRESH_TOKEN : AUTH_CODE,
+          token: refreshToken || authCode,
+          redirectUri: redirectUri,
+        },
+      })
+      .then((response) => {
+        if (response.data.refreshToken) {
           setSaveStatus(true);
           setRefreshToken(response.data.refreshToken);
-          return ;
+          return;
         }
-      }).catch(err => {
+      })
+      .catch((err) => {
         setAuthCode(null);
         setRefreshToken(null);
       });
-    }
+  };
 
-    const EventSaveButton = (props) => {
-      const { isSaved } = props;
-      return isSaved ? <span className="event-item-button-saved">SAVED!</span> 
-      : <a className="event-item-button-save" onClick={saveEventOnCalendar}>SAVE</a>;
-    }
+  const EventSaveButton = (props) => {
+    const { isSaved } = props;
+    return isSaved ? (
+      <span className="event-item-button-saved">SAVED!</span>
+    ) : (
+      <a className="event-item-button-save" onClick={saveEventOnCalendar}>
+        SAVE
+      </a>
+    );
+  };
 
   return time ? (
     <li className="event-item-card">

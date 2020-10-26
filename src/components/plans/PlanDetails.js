@@ -79,41 +79,6 @@ const PlanDetailsDescription = (props) => {
     }
   }, [redirectUri])
 
-  const PlanSaveButton = (props) => {
-    const { isSaved } = props;
-    return isSaved ? <span className="plan-details-description-card-button-save plan-details-description-card-button">SAVED!</span> 
-    : <a className="plan-details-description-card-button-save plan-details-description-card-button" onClick={savePlanOnCalendar}>SAVE</a>;
-  }
-
-  const savePlanOnCalendar = async () => {
-    if(!authCode && !refreshToken) {
-      return await axios.post(`${endpoint}/plan/save`, {redirectUri : redirectUri})
-      .then((response) => {
-          if(typeof(response.data) === 'string') {
-            return window.location.href = response.data; //auth url
-          }
-      }).catch(err => {
-          console.log(err);
-      });
-    }
-    
-    axios.post(`${endpoint}/plan/save`, {
-        eventId: selectedPlan._id,
-        type: refreshToken ? REFRESH_TOKEN : AUTH_CODE,
-        token: refreshToken || authCode,
-        redirectUri: redirectUri
-      }).then(response => {
-        if(response.data.refreshToken) {
-          setSaveStatus(true);
-          setRefreshToken(response.data.refreshToken);
-          return ;
-        }
-      }).catch(err => {
-        setAuthCode(null);
-        setRefreshToken(null);
-      });
-    }
-
   return (
     <div className="plan-details-description">
       <h1 className="plan-details-description-summary">
@@ -130,10 +95,6 @@ const PlanDetailsDescription = (props) => {
         </div>
         <div className="plan-details-description-card-text">
           {selectedPlan.description}
-        </div>
-        <div className="plan-details-description-card-buttons">
-          <PlanSaveButton isSaved={isSaved} />
-          <a className="plan-details-description-card-button-share plan-details-description-card-button">SHARE</a>
         </div>
       </div>
     </div>

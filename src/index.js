@@ -15,7 +15,7 @@ import { planReducer } from './reducers/planReducer';
 
 import { setRefreshToken, setAuthCode, setRedirectUri } from './actions/authActions';
 import { fetchEvents } from './actions/eventActions';
-import { fetchPlans, fetchPlanById, selectPlan } from './actions/planActions';
+import { fetchPlans, fetchPlanById } from './actions/planActions';
 
 const rootReducer = combineReducers({
   authReducer: authReducer,
@@ -33,7 +33,6 @@ const mapDispatchToProps = (dispatch) => {
     fetchEvents: () => dispatch(fetchEvents()),
     fetchPlans: () => dispatch(fetchPlans()),
     fetchPlanById: (_id) => dispatch(fetchPlanById(_id)),
-    selectPlan: () => dispatch(selectPlan()),
   };
 };
 

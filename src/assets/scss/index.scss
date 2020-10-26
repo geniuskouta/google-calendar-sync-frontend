@@ -4,6 +4,12 @@
 @import './plan/plan.scss';
 
 #root {
-    height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
+}
+
+@media only screen and (min-width: $mb-screen) {
+    #root {
+        height: 100vh;
+        overflow: hidden;
+    }
 }

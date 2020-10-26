@@ -5,7 +5,6 @@ const EventList = (props) => {
   console.log(props);
   const {
     events,
-    fetchEvents,
     authCode,
     refreshToken,
     redirectUri,
@@ -13,12 +12,6 @@ const EventList = (props) => {
     setRefreshToken,
     setRedirectUri,
   } = props;
-  useEffect(() => {
-    if (!events) {
-      fetchEvents();
-    }
-    console.log(events);
-  }, [events]);
 
   return (
     <ul className="event-list">

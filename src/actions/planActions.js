@@ -1,4 +1,4 @@
-import { CREATE_PLAN, ALL_PLAN, SELECT_PLAN, SINGLE_PLAN } from "../types/planTypes";
+import { ALL_PLAN, SINGLE_PLAN } from "../types/planTypes";
 
 
 import axios from 'axios';
@@ -29,21 +29,5 @@ export const fetchPlanById = (planId) => {
         .catch((err) => {
           console.log(err);
         });
-    }
-}
-
-export const savePlanById = (planId) => {
-
-}
-
-export const selectPlan = (planId) => {
-    return (dispatch, getState) => {
-        const { plans } = getState().planReducer;
-        const selectedPlan = plans.filter(plan => {
-            return plan._id == planId;
-        });
-        console.log('ypp', selectedPlan);
-        console.log(planId);
-        dispatch({ type: SELECT_PLAN, selectedPlan });
     }
 }
