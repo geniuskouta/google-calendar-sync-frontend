@@ -1,15 +1,2 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap');
+@import url('//fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap');
 @import './reset.scss';
-@import './event/event.scss';
-@import './plan/plan.scss';
-
-#root {
-    overflow-x: hidden;
-}
-
-@media only screen and (min-width: $mb-screen) {
-    #root {
-        height: 100vh;
-        overflow: hidden;
-    }
-}
