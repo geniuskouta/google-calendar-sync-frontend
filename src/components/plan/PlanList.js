@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PlanItem from "./PlanItem";
 
 const PlanList = (props) => {
     const { plans, fetchPlans } = props;
@@ -11,9 +12,14 @@ const PlanList = (props) => {
       }, [plans]);
     
     return (
-        <div>
-            plans
-        </div>
+        <>
+            {plans && plans.map(plan => {
+              // use plan id to save an event
+              return <PlanItem
+              key={plan._id}
+              plan={plan} />;
+            })}
+        </>
     );
 }
 

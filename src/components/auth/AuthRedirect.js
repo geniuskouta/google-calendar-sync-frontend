@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from "react-router-dom";
+
+/*
+* Users will be redirected here(/authenticate) after signing in with their Google Account.
+* This page will save auth code and redirect users back to where they came from.
+*/
 
 const AuthRedirect = (props) => {
     const {
         authCode,
         setAuthCode,
-        RedirectAfterAuthenticated
     } = props;
     
     const [uri, setUri] = useState(null);
@@ -13,10 +18,11 @@ const AuthRedirect = (props) => {
         if(!authCode) {
             setAuthCode();
         }
-        setRedirectUri();
-    }, [authCode])
+        setRedirectUriFromStateParam();
+        console.log(uri);
+    }, [uri, authCode])
 
-    const setRedirectUri = () => {
+    const setRedirectUriFromStateParam = () => {
         let searchParams = decodeURIComponent(window.location.search);
         let redirectExists = searchParams.match(/\?state\=/);
         if(redirectExists) {
@@ -25,9 +31,7 @@ const AuthRedirect = (props) => {
         }
     }
 
-    return (
-        <RedirectAfterAuthenticated uri={uri} />
-    );
+    return uri ? <Redirect to={uri} /> : <div>Loading...</div>;
 }
 
 export default AuthRedirect;

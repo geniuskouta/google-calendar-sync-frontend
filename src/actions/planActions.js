@@ -1,4 +1,4 @@
-import { ALL_PLAN, SINGLE_PLAN } from "../types/planTypes";
+import { ALL_PLAN, SINGLE_PLAN, SELECT_PLAN } from "../types/planTypes";
 
 
 import axios from 'axios';
