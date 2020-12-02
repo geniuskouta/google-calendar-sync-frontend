@@ -1,34 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import EventList from "../events/EventList";
-import PlanList from "../plans/PlanList";
-import PlanDetails from "../plans/PlanDetails";
+import React, {useEffect, useState} from "react";
+import { Route, Switch } from "react-router-dom";
 import AuthRedirect from "../auth/AuthRedirect";
 
+import PlanList from "../plan/PlanList";
+import PlanDetails from "../plan/PlanDetails";
+
 function ClientRoutes(props) {
-
-  const RedirectAfterAuthenticated = () => {
-    let uri = decodeURIComponent(window.location.search);
-    uri = uri.split("?state=")[1].split("&")[0];
-    console.log(uri);
-    return <Redirect to={uri} />
-  }
-
+  const { authCode, setAuthCode } = props;
+  
   return (
     <Switch>
-      <Route path="/events">
-        <EventList {...props} />
-      </Route>
-      <Route path="/event"></Route>
       <Route path="/plans">
         <PlanList {...props} />
       </Route>
-      <Route path="/plan">
+      <Route path="/plan/:id">
         <PlanDetails {...props} />
       </Route>
       <Route path="/authenticate">
-        <AuthRedirect {...props}
-        RedirectAfterAuthenticated={RedirectAfterAuthenticated}
+        <AuthRedirect
+        authCode={authCode}
+        setAuthCode={setAuthCode}
         />
       </Route>
     </Switch>

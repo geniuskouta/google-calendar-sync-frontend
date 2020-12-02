@@ -8,9 +8,12 @@ export const setRefreshToken = (refreshToken) => {
 
 export const setAuthCode = () => {
     return (dispatch, getState) => {
-        let code = decodeURIComponent(window.location.search);
-        code = code.split('code=')[1].split('&')[0];
-        dispatch({ type: AUTH_CODE, authCode: code});
+        let searchParams = decodeURIComponent(window.location.search);
+        let codeExists = searchParams.match(/code\=/);
+        if(codeExists) {
+            let code = searchParams.split('code=')[1].split('&')[0];
+            dispatch({ type: AUTH_CODE, authCode: code});
+        }
     }
 }
 

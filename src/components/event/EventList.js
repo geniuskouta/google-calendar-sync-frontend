@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import EventItem from "./EventItem";
 
 const EventList = (props) => {
-  console.log(props);
   const {
     events,
     authCode,
@@ -14,11 +13,13 @@ const EventList = (props) => {
   } = props;
 
   return (
-    <ul className="event-list">
+    <>
       {events &&
         events.map((event) => {
+          // use plan id to save an event
           return (
             <EventItem
+              key={event._id}
               event={event}
               authCode={authCode}
               refreshToken={refreshToken}
@@ -29,7 +30,7 @@ const EventList = (props) => {
             />
           );
         })}
-    </ul>
+    </>
   );
 };
 
