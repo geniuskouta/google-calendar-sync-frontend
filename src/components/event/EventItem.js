@@ -76,7 +76,7 @@ const EventItem = (props) => {
   const EventTime = (props) => {
     const { time } = props;
     return time ? (
-      <div className="event-single-time">9:00 - 10:00</div>
+    <div className="event-single-time">{time.startTime} - {time.endTime}</div>
     ) : (
       <div className="event-single-time">--:-- - --:--</div>
     );
