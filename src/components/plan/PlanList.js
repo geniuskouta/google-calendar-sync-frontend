@@ -12,14 +12,16 @@ const PlanList = (props) => {
       }, [plans]);
     
     return (
-        <>
+        <main>
+          <article class="plan-collection">
             {plans && plans.map(plan => {
               // use plan id to save an event
               return <PlanItem
               key={plan._id}
               plan={plan} />;
             })}
-        </>
+            </article>
+        </main>
     );
 }
 

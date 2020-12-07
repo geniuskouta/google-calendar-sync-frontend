@@ -13,7 +13,13 @@ const EventItem = (props) => {
     redirectUri,
     setRedirectUri,
   } = props;
+
+  /*
+  * time / setTime handles event time string
+  * isSaved handles the state of whether the event is saved on calendar
+  */
   const [time, setTime] = useState(null);
+  const [isSaved, setSaveStatus] = useState(null)
 
   useEffect(() => {
     if (!redirectUri) {
@@ -53,17 +59,38 @@ const EventItem = (props) => {
         redirectUri
       );
       setRefreshToken(token);
+      setSaveStatus(true);
   };
+
+  const EventSaveButton = (props) => {
+    const { isSaved } = props;
+    return isSaved ? (
+      <span className="event-single-action-button-saved event-single-action-button">SAVED!</span>
+    ) : (
+      <a className="event-single-action-button-save event-single-action-button" onClick={saveEvent}>
+        SAVE
+      </a>
+    );
+  };
+
+  const EventTime = (props) => {
+    const { time } = props;
+    return time ? (
+      <div className="event-single-time">9:00 - 10:00</div>
+    ) : (
+      <div className="event-single-time">--:-- - --:--</div>
+    );
+  }
 
   return (
     (
-      <>
-        <div>{event.summary}</div>
-        <div>{event._id}</div>
-        <a onClick={saveEvent}>
-          SAVE
-        </a>
-      </>
+      <li className="event-single">
+        <EventTime time={time} />
+        <div className="event-single-summary">{event.summary}</div>
+        <div className="event-single-location">{event.location}</div>
+        <div className="event-single-description">{event.description}</div>
+        <EventSaveButton isSaved={isSaved} />
+      </li>
     )
   );
 };

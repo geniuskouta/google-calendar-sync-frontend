@@ -1,0 +1,103 @@
+.plan-details {
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    padding: 70px 20px 0;
+    max-width: 420px;
+    height: 200px;
+    margin: 0 auto;
+    &-title {
+        color: #ffffff;
+        font-size: 24px;
+        line-height: 28px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    &-card {
+        border-radius: 5px;
+        background-color: #ffffff;
+        box-shadow: $nice-boxshadow;
+        margin-top: 24px;
+        padding: 15px 18px;
+    }
+
+    &-description-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    &-description-text {
+        font-size: 14px;
+        line-height: 18px;
+        margin-top: 12px;
+    }
+
+    &-schedule {
+        max-width: 420px;
+        margin-top: 36px;
+
+        &-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    }
+
+    &-action-buttons {
+        font-size: 0;
+        margin-top: 12px;
+    }
+
+    &-action-button {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 28px;
+        display: inline-block;
+        border-radius: 5px;
+        width: 84px;
+        cursor: pointer;
+
+        &:nth-child(n + 2) {
+            margin-left: 12px;
+        }
+
+        &-saveall {
+            background-color: $watermelon;
+        }
+
+        &-share {
+            background-color: $ocean;
+        }
+    }
+
+    &-user {
+        font-size: 0;
+        margin-top: 12px;
+        &-profile {
+            display: inline-block;
+            vertical-align: middle;
+            border: 1px solid #707070;
+            width: 34px;
+            height: 34px;
+        }
+
+        &-info {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 12px;
+            &-name {
+                font-size: 14px;
+            }
+            &-sharecount {
+                font-size: 14px;
+                margin-top: 4px;
+                &-bold {
+                    font-weight: bold;
+                    margin: 0 4px;
+                }
+            }
+        }
+    }
+}
