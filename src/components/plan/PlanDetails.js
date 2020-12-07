@@ -53,7 +53,7 @@ const PlanDetails = (props) => {
         </div>
       </section>
       <section className="plan-details-schedule">
-        <h2>Schedule</h2>
+        <h2 className="plan-details-schedule-title">Schedule</h2>
         {/* events below */}
         {events && (
           <EventList

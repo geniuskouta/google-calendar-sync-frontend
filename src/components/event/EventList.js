@@ -13,7 +13,7 @@ const EventList = (props) => {
   } = props;
 
   return (
-    <>
+    <ul className="event-collection">
       {events &&
         events.map((event) => {
           // use plan id to save an event
@@ -30,7 +30,7 @@ const EventList = (props) => {
             />
           );
         })}
-    </>
+    </ul>
   );
 };
 

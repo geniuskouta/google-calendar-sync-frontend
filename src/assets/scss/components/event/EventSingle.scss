@@ -1,0 +1,59 @@
+.event-single {
+    border-radius: 5px;
+    padding: 12px;
+    box-shadow: $nice-boxshadow;
+
+    &:nth-child(n + 2) {
+        margin-top: 18px;
+    }
+
+    &-time {
+        font-size: 18px;
+        font-weight: bold;
+        border-bottom: 1px solid #CCCCCC;
+        padding-bottom: 8px;
+    }
+
+    &-summary {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 8px;
+    }
+
+    &-location {
+        font-size: 14px;
+        margin-top: 8px;
+        &::before {
+            content: '📍';
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 2px;
+        }
+    }
+
+    &-description {
+        font-size: 14px;
+        line-height: 16px;
+        margin-top: 8px;
+    }
+
+    &-action-button {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 28px;
+        display: inline-block;
+        border-radius: 5px;
+        width: 84px;
+        margin-top: 8px;
+        cursor: pointer;
+        &-save {
+            background-color: $watermelon;
+        }
+
+        &-saved {
+            background-color: $ocean;
+        }
+    }
+}
