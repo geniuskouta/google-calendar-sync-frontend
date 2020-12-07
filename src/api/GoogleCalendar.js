@@ -1,6 +1,28 @@
 import axios from "axios";
 const endpoint = "http://localhost:8000";
 
+export const getPlans = async () => {
+  return await axios
+  .get(`${endpoint}/plans`)
+  .then((response) => {
+    return response.data;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
+export const getPlanById = async (planId) => {
+  return await axios
+  .get(`${endpoint}/plan/${planId}`)
+  .then((response) => {
+    return  response.data;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
 export const getAuthUrl = async (redirectUri) => {
   return await axios
     .post(`${endpoint}/event/save`, {
