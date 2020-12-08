@@ -59,7 +59,7 @@ export const saveEventOnCalendar = async (event, type, token, redirectUri) => {
     })
     .then((response) => {
       const { refreshToken } = response.data;
-        console.log(`token resposne: ${response.data}`);
+        console.log(`token resposne: ${response.data.refreshToken}`);
         return refreshToken;
     })
     .catch((err) => {
