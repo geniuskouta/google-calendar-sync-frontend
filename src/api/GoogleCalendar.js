@@ -1,6 +1,6 @@
 import axios from "axios";
-const endpoint = "http://localhost:8000";
-// const endpoint = "https://funplan-api.herokuapp.com";
+// const endpoint = "http://localhost:8000";
+const endpoint = "https://funplan-api.herokuapp.com";
 
 export const getPlans = async () => {
   return await axios
