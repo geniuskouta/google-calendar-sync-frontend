@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import { getAuthUrl, saveEventOnCalendar } from "../../api/GoogleCalendar";
 import { REFRESH_TOKEN, AUTH_CODE } from "../../types/authTypes";
 
@@ -8,7 +7,6 @@ const EventItem = (props) => {
     event,
     authCode,
     refreshToken,
-    setAuthCode,
     setRefreshToken,
     redirectUri,
     setRedirectUri,
@@ -25,7 +23,6 @@ const EventItem = (props) => {
     if (!redirectUri) {
       setRedirectUri();
     }
-    console.log('yaaa');
     if (!time) {
       const startTime = getHoursFromISO(event.startTime);
       const endTime = getHoursFromISO(event.endTime);
@@ -34,7 +31,7 @@ const EventItem = (props) => {
         endTime,
       });
     }
-  }, [redirectUri, refreshToken, event.startTime, event.endTime, time]);
+  }, [redirectUri, event.startTime, event.endTime, time]);
 
   const getHoursFromISO = (ISO) => {
     const time = ISO.split("T")[1].slice(0, 5); // get only hours and minutes
