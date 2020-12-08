@@ -52,14 +52,17 @@ const EventItem = (props) => {
       return ;
     }
 
-    const token = await saveEventOnCalendar(
+    saveEventOnCalendar(
         event,
         refreshToken ? REFRESH_TOKEN : AUTH_CODE,
         refreshToken || authCode,
         redirectUri
-      );
+    ).then(token => {
       setRefreshToken(token);
       setSaveStatus(true);
+    }).catch(err => {
+      console.log(err);
+    });
   };
 
   const EventSaveButton = (props) => {

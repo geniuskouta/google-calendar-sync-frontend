@@ -1,6 +1,6 @@
 import axios from "axios";
-// const endpoint = "http://localhost:8000";
-const endpoint = "https://funplan-api.herokuapp.com";
+const endpoint = "http://localhost:8000";
+// const endpoint = "https://funplan-api.herokuapp.com";
 
 export const getPlans = async () => {
   return await axios
@@ -59,11 +59,7 @@ export const saveEventOnCalendar = async (event, type, token, redirectUri) => {
     })
     .then((response) => {
       const { refreshToken } = response.data;
-      if (refreshToken) {
-        //   return { type: REFRESH_TOKEN, token: refreshToken };
         return refreshToken;
-      }
-      return;
     })
     .catch((err) => {
       console.log(err);
